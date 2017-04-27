@@ -7,6 +7,7 @@
           src="https://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
           crossorigin="anonymous"></script>
+	<script src="color.js"></script>
 	</head>
 	<body>
         <iframe id="ytplayer" type="text/html" width="640" height="360" frameborder="0"></iframe>
@@ -55,8 +56,19 @@
 
     if (canvas.getContext) {
         var ctx = canvas.getContext('2d');
+	ctx.translate(0, canvas.height / 2);
+	ctx.scale(1, -1);
         for (var i = 0; i < sampleVals.length; i++) {
-            ctx.fillRect(i*((canvas.width - 24)/sampleVals.length), 0, 0.1, sampleVals[i]*100);
+	    var hsv = {
+		h: Math.floor((100 - (sampleVals[i]*100)) * 255 / 100),
+		s: Math.abs((sampleVals[i]*10000) - 50)/50,
+		v: 1
+	    }
+	    console.log(hsv);
+	    var color = Color(hsv).toCSS();
+	    console.log(color);
+	    ctx.fillStyle=color;
+            ctx.fillRect(i*((canvas.width - 24)/sampleVals.length), 0, 0.5, sampleVals[i]*100);
         }
     }
 </script>	
