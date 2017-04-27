@@ -9,10 +9,22 @@
           crossorigin="anonymous"></script>
 	</head>
 	<body>
-        <iframe id="ytplayer" type="text/html" width="640" height="360" frameborder="0" style="display:block"></iframe>
-        <canvas id="spectrogram" height="100" style"display:block"></canvas>
+        <iframe id="ytplayer" type="text/html" width="640" height="360" frameborder="0"></iframe>
+        <canvas id="spectrogram"></canvas>
 	</body>
 </html>
+
+<style>
+    #spectrogram {
+        display: block;
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    #ytplayer {
+        display: block;
+    }
+</style>
 
 <script type="text/javascript">
     var sampleVals = []
@@ -44,7 +56,7 @@
     if (canvas.getContext) {
         var ctx = canvas.getContext('2d');
         for (var i = 0; i < sampleVals.length; i++) {
-            ctx.fillRect(i*(canvas.width/sampleVals.length), 0, 0.1, sampleVals[i]*100);
+            ctx.fillRect(i*((canvas.width - 24)/sampleVals.length), 0, 0.1, sampleVals[i]*100);
         }
     }
 </script>	
