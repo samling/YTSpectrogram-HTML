@@ -16,9 +16,14 @@
 
 <script type="text/javascript">
     var sampleVals = []
+
     var urlParams = new URLSearchParams(window.location.search);
     var youtubeUrl = urlParams.get("yt");
     var id = youtubeUrl.split("=");
+
+    var canvas = $("#spectrogram")[0];
+    var video = $("#ytplayer");
+
     $.ajax({
         url: "https://sboynton.com/api/Samples/" + id[1],
         type: "GET",
@@ -31,9 +36,9 @@
             }
         }
     });
-    var canvas = $("#spectrogram")[0];
-    var video = $("#ytplayer");
+
     canvas.width = video.width();
+
     document.getElementById("ytplayer").src = youtubeUrl.replace("watch?v=", "v/");
 
     if (canvas.getContext) {
